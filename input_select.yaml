@@ -1,0 +1,40 @@
+### input_select.yaml
+
+# Washing Machine
+  washing_machine_status:
+    name: Washing Machine Status
+    options:
+      - Idle
+      - Running
+      - Finishing
+      - Finished
+    initial: Finished
+
+# Tumbler
+  tumbler_machine_status:
+    name: Tumbler Status
+    options:
+      - Idle
+      - Running
+      - Finishing
+      - Finished
+    initial: Finished
+
+# Dehumidifyer cellar
+  dehumidifyer_cellar_status:
+    name: Dehumidifyer Cellar Status
+    options:
+      - "Off"
+      - Idle
+      - Running
+    initial: "Off"
+
+# Dehumidifyer washing kitchen
+  dehumidifyer_washing_kitchen_status:
+    name: Dehumidifyer Washing Kitchen Status
+    options:
+      - "Off"
+      - Idle
+      - Running
+    initial: "Off"
+

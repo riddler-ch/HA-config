@@ -1,0 +1,52 @@
+### customize.yaml
+
+input_select.tumbler_machine_status:
+  hidden: true
+
+input_select.washing_machine_status:
+  hidden: true
+
+sensor.mains_voltage:
+  friendly_name: "Mains Voltage"
+
+sensor.power_consumption_dehumidifyer_cellar:
+  friendly_name: "Entfeuchter Keller"
+
+sensor.power_consumption_dehumidifyer_washing_kitchen:
+  friendly_name: "Entfeuchter WaKü"
+
+sensor.power_consumption_phase1:
+  friendly_name: "Phase 1"
+
+sensor.power_consumption_phase2:
+  friendly_name: "Phase 2"
+
+sensor.power_consumption_phase3:
+  friendly_name: "Phase 3"
+
+sensor.power_consumption_tumbler:
+  friendly_name: "Tumbler"
+
+sensor.power_consumption_washing_machine:
+  friendly_name: "Waschmaschine"
+
+sensor.soil_moisture1:
+  hidden: true
+
+sensor.soil_moisture1_sma:
+  friendly_name: "Bodenfeuchte"
+
+sensor.soil_temperature1:
+  friendly_name: "Bodentemperatur"
+
+switch.dehumidifyer_cellar:
+  friendly_name: "Entfeuchter Keller"
+
+switch.dehumidifyer_washing_kitchen:
+  friendly_name: "Entfeuchter Waschküche"
+
+switch.tumbler:
+  friendly_name: "Tumbler"
+
+switch.washing_machine:
+  friendly_name: "Waschmaschine"

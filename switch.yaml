@@ -1,0 +1,46 @@
+### switch.yaml
+
+#MyStrom Schalter
+  - platform: mystrom
+    host: 192.168.1.210
+    name: dehumidifyer_washing_kitchen
+  - platform: mystrom
+    host: 192.168.1.211
+    name: washing_machine
+  - platform: mystrom
+    host: 192.168.1.212
+    name: dehumidifyer_cellar
+  - platform: mystrom
+    host: 192.168.1.213
+    name: tumbler
+
+# Sonoff Schalter (irrigation)
+  - platform: mqtt
+    name: irrigation1
+    state_topic: "automation/irrigation/stat/controller/POWER1"
+    command_topic: "automation/irrigation/cmd/controller/POWER1"
+    payload_on: "ON"
+    payload_off: "OFF"
+    icon: mdi:water
+  - platform: mqtt
+    name: irrigation2
+    state_topic: "automation/irrigation/stat/controller/POWER2"
+    command_topic: "automation/irrigation/cmd/controller/POWER2"
+    payload_on: "ON"
+    payload_off: "OFF"
+    icon: mdi:water
+  - platform: mqtt
+    name: irrigation3
+    state_topic: "automation/irrigation/stat/controller/POWER3"
+    command_topic: "automation/irrigation/cmd/controller/POWER3"
+    payload_on: "ON"
+    payload_off: "OFF"
+    icon: mdi:water
+  - platform: mqtt
+    name: Irrigation4
+    state_topic: "automation/irrigation/stat/controller/POWER4"
+    command_topic: "automation/irrigation/cmd/controller/POWER4"
+    payload_on: "ON"
+    payload_off: "OFF"
+    icon: mdi:water
+

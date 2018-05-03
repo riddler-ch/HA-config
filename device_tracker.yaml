@@ -1,0 +1,9 @@
+### device_tracker.yaml
+
+- platform: nmap_tracker
+  hosts: 192.168.1.150 192.168.1.151
+  home_interval: 5
+  consider_home: 600
+  new_device_defaults:
+    track_new_devices: False
+    hide_if_away: False

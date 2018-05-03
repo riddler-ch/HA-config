@@ -1,0 +1,78 @@
+### sensors.yaml
+
+# weather prediction
+  - platform: yr
+    name: weather
+    monitored_conditions:
+      - temperature
+      - symbol
+      - precipitation
+      - windSpeed
+      - pressure
+      - windDirection
+      - humidity
+      - cloudiness
+
+# house power consumption (emontx v3)
+  - platform: mqtt
+    state_topic: "automation/indoor/ct1/power1"
+    name: power_consumption_phase1
+    unit_of_measurement: "W"
+    force_update: true
+  - platform: mqtt
+    state_topic: "automation/indoor/ct2/power1"
+    name: power_consumption_phase2
+    unit_of_measurement: "W"
+    force_update: true
+  - platform: mqtt
+    state_topic: "automation/indoor/ct3/power1"
+    name: power_consumption_phase3
+    unit_of_measurement: "W"
+    force_update: true
+  - platform: mqtt
+    state_topic: "automation/indoor/vrms/power1"
+    name: mains_voltage
+    unit_of_measurement: "V"
+    force_update: true
+
+# myStrom power consumption
+  - platform: template
+    sensors:
+      power_consumption_washing_machine:
+        unit_of_measurement: "W"
+        value_template: "{{ states.switch.washing_machine.attributes.current_power_w }}"
+  - platform: template
+    sensors:
+      power_consumption_tumbler:
+        unit_of_measurement: "W"
+        value_template: "{{ states.switch.tumbler.attributes.current_power_w }}"
+  - platform: template
+    sensors:
+      power_consumption_dehumidifyer_cellar:
+        unit_of_measurement: "W"
+        value_template: "{{ states.switch.dehumidifyer_washing_kitchen.attributes.current_power_w }}"
+  - platform: template
+    sensors:
+      power_consumption_dehumidifyer_washing_kitchen:
+        unit_of_measurement: "W"
+        value_template: "{{ states.switch.dehumidifyer_cellar.attributes.current_power_w }}"
+
+# outdoor sensors
+  - platform: mqtt
+    state_topic: "automation/outdoor/soilmoisture/boden1"
+    name: soil_moisture1
+    unit_of_measurement: "VWC"
+    force_update: true
+  - platform: mqtt
+    state_topic: "automation/outdoor/soiltemperature/boden1"
+    name: soil_temperature1
+    unit_of_measurement: "°C"
+    force_update: true
+  - platform: filter
+    name: soil_moisture1_SMA
+    entity_id: sensor.soil_moisture1
+    filters:
+      - filter: time_simple_moving_average
+        window_size: 00:05
+        precision: 2
+

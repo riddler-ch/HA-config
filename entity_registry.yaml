@@ -1,0 +1,8 @@
+media_player.kuche_2:
+  name:
+  platform: sonos
+  unique_id: RINCON_000E5820485E01400
+media_player.kuche:
+  name:
+  platform: sonos
+  unique_id: RINCON_5CAAFD25329C01400
