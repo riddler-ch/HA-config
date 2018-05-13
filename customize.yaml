@@ -46,7 +46,31 @@ switch.dehumidifyer_washing_kitchen:
   friendly_name: "Entfeuchter Waschküche"
 
 switch.tumbler:
+  hidden: true
   friendly_name: "Tumbler"
 
 switch.washing_machine:
+  hidden: true
   friendly_name: "Waschmaschine"
+
+device_tracker.yolandasiphone:
+  friendly_name: "Yolanda"
+
+device_tracker.samsunggalaxys7:
+  friendly_name: "Martin"
+
+sensor.washing_machine_status:
+  friendly_name: "Waschmaschine"
+  icon: mdi:washing-machine
+
+sensor.tumbler_status:
+  friendly_name: "Tumbler"
+  icon: mdi:tumble-dryer
+
+sensor.dehumidifyer_washing_kitchen_status:
+  friendly_name: "Entfeuchter WaKü"
+  icon: mdi:cloud-off-outline
+
+sensor.dehumidifyer_cellar_status:
+  friendly_name: "Entfeuchter Keller"
+  icon: mdi:cloud-off-outline

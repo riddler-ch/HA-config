@@ -3,24 +3,20 @@ test_view:
   name: "Test"
   icon: mdi:home
   entities:
-    - group.outside
     - group.irrigation
     - group.power
     - group.weather
     - group.network
     - group.mediaplayer
     - group.washing
-
-outside:
-  name: "Draussen"
-  entities:
-    - sensor.soil_moisture1_sma
-    - sensor.soil_temperature1
+    - group.presence
 
 irrigation:
   name: "Bewässerung"
   control: hidden
   entities:
+    - sensor.soil_moisture1_sma
+    - sensor.soil_temperature1
     - switch.irrigation1
     - switch.irrigation2
     - switch.irrigation3
@@ -30,25 +26,29 @@ washing:
   name: "Waschküche"
   control: hidden
   entities:
+    - sensor.washing_machine_status
+    - sensor.power_consumption_washing_machine
+    - sensor.tumbler_status
+    - sensor.power_consumption_tumbler
+    - sensor.dehumidifyer_washing_kitchen_status
+    - sensor.power_consumption_dehumidifyer_washing_kitchen
+    - sensor.dehumidifyer_cellar_status
+    - sensor.power_consumption_dehumidifyer_cellar
     - switch.dehumidifyer_cellar
     - switch.dehumidifyer_washing_kitchen
-    - switch.tumbler
-    - switch.washing_machine
 
 power:
   name: "Stromverbrauch"
+  control: hidden
   entities:
     - sensor.mains_voltage
     - sensor.power_consumption_phase1
     - sensor.power_consumption_phase2
     - sensor.power_consumption_phase3
-    - sensor.power_consumption_dehumidifyer_cellar
-    - sensor.power_consumption_dehumidifyer_washing_kitchen
-    - sensor.power_consumption_tumbler
-    - sensor.power_consumption_washing_machine
 
 network:
   name: "Netzwerk"
+  control: hidden
   entities:
     - binary_sensor.asus_router_connection
     - binary_sensor.dlanwireless_connection
@@ -57,12 +57,14 @@ network:
 
 media_player:
   name: "Mediaplayer"
+  control: hidden
   entities:
     - media_player.kuche
     - media_player.kuche_2
 
 weather:
   name: "Wetter"
+  control: hidden
   entities:
     - sensor.weather_cloudiness
     - sensor.weather_humidity
@@ -73,3 +75,9 @@ weather:
     - sensor.weather_wind_direction
     - sensor.weather_wind_speed
 
+presence:
+  name: "Anwesenheiten"
+  control: hidden
+  entities:
+    - device_tracker.yolandasiphone
+    - device_tracker.samsunggalaxys7

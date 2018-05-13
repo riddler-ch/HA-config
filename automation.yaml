@@ -3,7 +3,7 @@
 # Washing machine
 
 - alias: Set the washing machine state to running when power consumption detected
-  hide_entity: True
+  hide_entity: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.power_consumption_washing_machine
@@ -27,6 +27,7 @@
         option: "Running"
 
 - alias: Set the washing machine state to finishing when power consumption has dropped
+  hide_entity: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.power_consumption_washing_machine
@@ -44,7 +45,7 @@
         option: "Finishing"
 
 - alias: Set washing machine state to finished after timeout
-  hide_entity: True
+  hide_entity: true
   trigger:
     - platform: state
       entity_id: input_select.washing_machine_status
@@ -67,7 +68,7 @@
 # Tumbler
 
 - alias: Set the tumbler state to running when power consumption detected
-  hide_entity: True
+  hide_entity: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.power_consumption_tumbler
@@ -91,6 +92,7 @@
         option: "Running"
 
 - alias: Set the tumbler state to finishing when power consumption has dropped
+  hide_entity: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.power_consumption_tumbler
@@ -108,6 +110,7 @@
         option: "Finishing"
 
 - alias: Set tumbler state to finished after timeout
+  hide_entity: true
   trigger:
     - platform: state
       entity_id: input_select.tumbler_status
@@ -130,6 +133,7 @@
 # Dehumidifyer washing kitchen
 
 - alias: Set the dehumidifyer washing kitchen state to running when power consumption detected
+  hide_entity: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.power_consumption_dehumidifyer_washing_kitchen
@@ -143,6 +147,7 @@
         option: "Running"
 
 - alias: Set the dehumidifyer washing kitchen state to idle when power consumption has dropped
+  hide_entity: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.power_consumption_dehumidifyer_washing_kitchen
@@ -157,6 +162,7 @@
         option: "Idle"
 
 - alias: Set the dehumidifyer washing kitchen state to off when power consumption is zero
+  hide_entity: true
   trigger:
     - platform: numeric_state
       entity_id: sensor.power_consumption_dehumidifyer_washing_kitchen
@@ -169,3 +175,48 @@
         entity_id: input_select.dehumidifyer_washing_kitchen_status
         option: "Off"
 
+
+# Dehumidifyer cellar
+
+- alias: Set the dehumidifyer cellar state to running when power consumption detected
+  hide_entity: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.power_consumption_dehumidifyer_cellar
+      above: 50
+      for:
+        seconds: 30
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.dehumidifyer_cellar_status
+        option: "Running"
+
+- alias: Set the dehumidifyer cellar state to idle when power consumption has dropped
+  hide_entity: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.power_consumption_dehumidifyer_cellar
+      below: 5
+      above: 1
+      for:
+        seconds: 30
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.dehumidifyer_cellar_status
+        option: "Idle"
+
+- alias: Set the dehumidifyer cellar state to off when power consumption is zero
+  hide_entity: true
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.power_consumption_dehumidifyer_cellar
+      below: 1
+      for:
+        seconds: 30
+  action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.dehumidifyer_cellar_status
+        option: "Off"
