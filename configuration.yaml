@@ -74,6 +74,15 @@ influxdb:
     domains:
       - group 
 
+recorder:
+  purge_keep_days: 7
+  purge_interval: 1
+  exclude:
+    domains:
+      - automation
+    entities:
+      - sun.sun
+
 
 #################################################################
 ## Includes
@@ -108,3 +117,4 @@ switch: !include switch.yaml
 
 # Device tracker
 device_tracker: !include device_tracker.yaml
+

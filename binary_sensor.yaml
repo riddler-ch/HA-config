@@ -5,20 +5,20 @@
     host: 192.168.1.1
     name: asus_router_connection
     count: 3
-    scan_interval: 30
+    scan_interval: 60
   - platform: ping
     host: 192.168.1.2
     name: linksys_router_connection
     count: 3
-    scan_interval: 30
+    scan_interval: 60
   - platform: ping
     host: www.google.ch
     name: google_connection
     count: 3
-    scan_interval: 30
+    scan_interval: 60
   - platform: ping
     host: 192.168.1.10
     name: dlanwireless_connection
     count: 3
-    scan_interval: 30
+    scan_interval: 60
 

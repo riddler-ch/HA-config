@@ -96,3 +96,9 @@
       dehumidifyer_cellar_status:
         value_template: "{{ states.input_select.dehumidifyer_cellar_status.state }}"
         friendly_name: "Entfeuchter Keller"
+
+# Worx Landroid
+  - platform: worx_landroid
+    host: 192.168.1.160
+    pin: 1234
+
