@@ -10,6 +10,15 @@ test_view:
     - group.mediaplayer
     - group.washing
     - group.presence
+    - group.mower
+
+weather_view:
+  view: yes
+  name: "Weather"
+  icon: mdi:weather-partlycloudy
+  entities:
+    - group.weather
+    - group.darksky
 
 irrigation:
   name: "Bewässerung"
@@ -75,9 +84,28 @@ weather:
     - sensor.weather_wind_direction
     - sensor.weather_wind_speed
 
+darksky:
+  name: "darksky"
+  entities:
+    - sensor.darksky_summary
+    - sensor.darksky_temperature
+    - sensor.darksky_hourly_summary
+    - sensor.darksky_daily_summary
+    - sensor.darksky_precip_intensity
+    - sensor.darksky_precip_intensity_1
+    - sensor.darksky_precip_intensity_2
+
 presence:
   name: "Anwesenheiten"
   control: hidden
   entities:
     - device_tracker.yolandasiphone
     - device_tracker.samsunggalaxys7
+
+mower:
+  name: "Landroid"
+  control: hidden
+  entities:
+    - sensor.worxlandroidstate
+    - sensor.worxlandroidrain
+    - sensor.worxlandroidbattery_percentage

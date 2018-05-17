@@ -14,7 +14,7 @@ homeassistant:
   customize: !include customize.yaml
 
 # Show links to resources in log and frontend
-introduction:
+# introduction:
 
 # Enables the frontend
 frontend:
@@ -80,8 +80,23 @@ recorder:
   exclude:
     domains:
       - automation
+      - media player
+      - input_select
     entities:
       - sun.sun
+      - sensor.weather_temperature
+      - sensor.weather_symbol
+      - sensor.weather_humidity
+      - sensor.weather_cloudiness
+      - sensor.soil_moisture1
+      - sensor.power_consumption_washing_machine
+      - sensor.power_consumption_tumbler
+      - sensor.power_consumption_dehumidifyer_washing_kitchen
+      - sensor.power_consumption_dehumidifyer_cellar
+      - switch.washing_machine
+      - switch.tumbler
+      - switch.dehumidifyer_washing_kitchen
+      - switch.dehumidifyer_cellar 
 
 
 #################################################################

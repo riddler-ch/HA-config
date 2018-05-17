@@ -69,8 +69,44 @@ sensor.tumbler_status:
 
 sensor.dehumidifyer_washing_kitchen_status:
   friendly_name: "Entfeuchter WaKü"
-  icon: mdi:cloud-off-outline
+  icon: mdi:multiplication
 
 sensor.dehumidifyer_cellar_status:
   friendly_name: "Entfeuchter Keller"
-  icon: mdi:cloud-off-outline
+  icon: mdi:multiplication
+
+sensor.worxlandroidstate:
+  friendly_name: "Status"
+  icon: mdi:robot-vacuum-variant
+
+sensor.worxlandroidrain:
+  friendly_name: "Regensensor"
+  icon: mdi:weather-rainy
+
+sensor.worxlandroidbattery_percentage:
+  friendly_name: "Batterie"
+  icon: mdi:battery-90
+
+sensor.darksky_summary:
+  friendly_name: "Allg. Lage"
+
+sensor.darksky_temperature:
+  friendly_name: "Temperatur"
+
+sensor.darksky_precip_intensity:
+  friendly_name: "Niederschlag"
+
+sensor.darksky_daily_summary:
+  friendly_name: "Ausblick 1w"
+
+sensor.darksky_hourly_summary:
+  friendly_name: "Ausblick 24h"
+
+sensor.darksky_precip_intensity_1:
+  friendly_name: "Niederschlag +1"
+
+sensor.darksky_precip_intensity_2:
+  friendly_name: "Niederschlag +2"
+
+sensor.worxlandroidbattery_voltage:
+  hidden: true

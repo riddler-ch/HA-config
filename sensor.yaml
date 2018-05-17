@@ -7,11 +7,25 @@
       - temperature
       - symbol
       - precipitation
-      - windSpeed
-      - pressure
-      - windDirection
       - humidity
       - cloudiness
+
+  - platform: darksky
+    api_key: !secret darksky
+    name: darksky
+    language: "de"
+    units: si
+    update_interval: '00:05'
+    forecast:
+      - 1
+      - 2
+    monitored_conditions:
+      - summary
+      - hourly_summary
+      - daily_summary
+      - temperature
+      - precip_intensity
+      
 
 # house power consumption (emontx v3)
   - platform: mqtt
@@ -99,6 +113,11 @@
 
 # Worx Landroid
   - platform: worx_landroid
-    host: 192.168.1.160
-    pin: 1234
+    host: !secret worx_landroid_ip
+    pin: !secret worx_landroid_pin
 
+
+# HA DB File Size
+  - platform: filesize
+    file_paths:
+      - home-assistant_v2.db
