@@ -1,19 +1,5 @@
 ### switch.yaml
 
-#MyStrom Schalter
-  - platform: mystrom
-    host: !secret mystrom3_ip
-    name: dehumidifyer_washing_kitchen
-  - platform: mystrom
-    host: !secret mystrom2_ip
-    name: washing_machine
-  - platform: mystrom
-    host: !secret mystrom1_ip
-    name: dehumidifyer_cellar
-  - platform: mystrom
-    host: !secret mystrom4_ip
-    name: tumbler
-
 # Sonoff Schalter (irrigation)
   - platform: mqtt
     name: irrigation1

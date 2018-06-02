@@ -1,0 +1,85 @@
+### washing_machine.yaml
+
+input_select:
+  washing_machine_status:
+    name: Washing Machine Status
+    options:
+      - Running
+      - Finished
+      - "Off"
+    initial: "Off"
+
+switch:
+  - platform: mystrom
+    host: !secret mystrom2_ip
+    name: mystrom2
+    
+sensor:
+# myStrom power consumption
+  - platform: template
+    sensors:
+      power_consumption_washing_machine:
+        unit_of_measurement: "W"
+        value_template: >-
+          {% if states.switch.mystrom2.attributes.current_power_w %}
+            {{states.switch.mystrom2.attributes.current_power_w }}
+          {% else %}
+            0.0
+          {% endif %}
+      washing_machine_status:
+        value_template: "{{ states.input_select.washing_machine_status.state }}"
+        friendly_name: "Waschmaschine"
+          
+automation:
+  - alias: Set the washing machine state to running when power consumption detected
+    hide_entity: true
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.power_consumption_washing_machine
+        above: 50
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: input_select.washing_machine_status
+          state: "Finished"
+        - condition: state
+          entity_id: input_select.washing_machine_status
+          state: "Off"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: "Running"
+
+  - alias: Set washing machine state to finished after timeout
+    hide_entity: true
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.power_consumption_washing_machine
+        below: 5
+        for:
+          minutes: 2
+    condition:
+      condition: state
+      entity_id: input_select.washing_machine_status
+      state: "Running"
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: "Finished"
+
+  - alias: Set washing machine state to off if power consumption is 0
+    hide_entity: true
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.power_consumption_washing_machine
+        below: 0.1
+        for:
+          minutes: 2
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.washing_machine_status
+          option: "Off"

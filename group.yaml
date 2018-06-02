@@ -19,6 +19,7 @@ weather_view:
   entities:
     - group.weather
     - group.darksky
+    - group.iframe1
 
 irrigation:
   name: "Bewässerung"
@@ -36,13 +37,9 @@ washing:
   control: hidden
   entities:
     - sensor.washing_machine_status
-    - sensor.power_consumption_washing_machine
     - sensor.tumbler_status
-    - sensor.power_consumption_tumbler
     - sensor.dehumidifyer_washing_kitchen_status
-    - sensor.power_consumption_dehumidifyer_washing_kitchen
     - sensor.dehumidifyer_cellar_status
-    - sensor.power_consumption_dehumidifyer_cellar
     - switch.dehumidifyer_cellar
     - switch.dehumidifyer_washing_kitchen
 
@@ -54,6 +51,11 @@ power:
     - sensor.power_consumption_phase1
     - sensor.power_consumption_phase2
     - sensor.power_consumption_phase3
+    - sensor.power_consumption_washing_machine
+    - sensor.power_consumption_tumbler
+    - sensor.power_consumption_dehumidifyer_washing_kitchen
+    - sensor.power_consumption_dehumidifyer_cellar
+
 
 network:
   name: "Netzwerk"
@@ -80,6 +82,7 @@ weather:
     - sensor.weather_precipitation
     - sensor.weather_pressure
     - sensor.weather_symbol
+    - sun.sun
     - sensor.weather_temperature
     - sensor.weather_wind_direction
     - sensor.weather_wind_speed
@@ -109,3 +112,20 @@ mower:
     - sensor.worxlandroidstate
     - sensor.worxlandroidrain
     - sensor.worxlandroidbattery_percentage
+
+openweathermap:
+  name: "openweathermap"
+  entities:
+    - sensor.owm_condition
+    - sensor.owm_temperature
+    - sensor.owm_rain
+    - sensor.owm_humidity
+    - sensor.owm_cloud_coverage
+    - sensor.owm_forecast
+
+host-system:
+  name: "host system"
+  entities:
+    - sensor.homeassistant_v2db
+    - updater.updater
+    

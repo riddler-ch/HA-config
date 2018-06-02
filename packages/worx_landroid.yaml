@@ -1,0 +1,18 @@
+### worx_landroid.yaml
+
+sensor:
+  - platform: worx_landroid
+    host: !secret worx_landroid_ip
+    pin: !secret worx_landroid_pin
+    
+automation:
+  - alias: Send Mower status to telegram bot
+    hide_entity: true
+    trigger:
+      - platform: state
+        entity_id: sensor.worxlandroidstate
+    action:
+      - service: notify.telegram
+        data:
+          title: "*Status Update*"
+          message: "Landroid is {{ states.sensor.worxlandroidstate.state}}"  

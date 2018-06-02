@@ -1,222 +1,27 @@
 ### automation.yaml
 
-# Washing machine
-
-- alias: Set the washing machine state to running when power consumption detected
-  hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.power_consumption_washing_machine
-      above: 50
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: input_select.washing_machine_status
-        state: "Idle"
-      - condition: state
-        entity_id: input_select.washing_machine_status
-        state: "Finishing"
-      - condition: state
-        entity_id: input_select.washing_machine_status
-        state: "Finished"
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.washing_machine_status
-        option: "Running"
-
-- alias: Set the washing machine state to finishing when power consumption has dropped
-  hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.power_consumption_washing_machine
-      below: 50
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: input_select.washing_machine_status
-        state: "Running"
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.washing_machine_status
-        option: "Finishing"
-
-- alias: Set washing machine state to finished after timeout
-  hide_entity: true
+#  Test Automation
+- alias: Test Automation
   trigger:
     - platform: state
-      entity_id: input_select.washing_machine_status
-      to: "Finishing"
-      for:
-        minutes: 5
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: input_select.washing_machine_status
-        state: "Finishing"
+      entity_id: input_select.testselect
   action:
-    - service: input_select.select_option
+    - service: notify.telegram
       data:
-        entity_id: input_select.washing_machine_status
-        option: "Finished"
-
-
-# Tumbler
-
-- alias: Set the tumbler state to running when power consumption detected
-  hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.power_consumption_tumbler
-      above: 50
-  condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: input_select.tumbler_status
-        state: "Idle"
-      - condition: state
-        entity_id: input_select.tumbler_status
-        state: "Finishing"
-      - condition: state
-        entity_id: input_select.tumbler_status
-        state: "Finished"
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.tumbler_status
-        option: "Running"
-
-- alias: Set the tumbler state to finishing when power consumption has dropped
-  hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.power_consumption_tumbler
-      below: 50
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: input_select.tumbler_status
-        state: "Running"
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.tumbler_status
-        option: "Finishing"
-
-- alias: Set tumbler state to finished after timeout
-  hide_entity: true
-  trigger:
-    - platform: state
-      entity_id: input_select.tumbler_status
-      to: "Finishing"
-      for:
-        minutes: 5
-  condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: input_select.tumbler_status
-        state: "Finishing"
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.tumbler_status
-        option: "Finished"
-
-
-# Dehumidifyer washing kitchen
-
-- alias: Set the dehumidifyer washing kitchen state to running when power consumption detected
-  hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.power_consumption_dehumidifyer_washing_kitchen
-      above: 50
-      for:
-        seconds: 30
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.dehumidifyer_washing_kitchen_status
-        option: "Running"
-
-- alias: Set the dehumidifyer washing kitchen state to idle when power consumption has dropped
-  hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.power_consumption_dehumidifyer_washing_kitchen
-      below: 5
-      above: 1
-      for:
-        seconds: 30
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.dehumidifyer_washing_kitchen_status
-        option: "Idle"
-
-- alias: Set the dehumidifyer washing kitchen state to off when power consumption is zero
-  hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.power_consumption_dehumidifyer_washing_kitchen
-      below: 1
-      for:
-        seconds: 30
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.dehumidifyer_washing_kitchen_status
-        option: "Off"
-
-
-# Dehumidifyer cellar
-
-- alias: Set the dehumidifyer cellar state to running when power consumption detected
-  hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.power_consumption_dehumidifyer_cellar
-      above: 50
-      for:
-        seconds: 30
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.dehumidifyer_cellar_status
-        option: "Running"
-
-- alias: Set the dehumidifyer cellar state to idle when power consumption has dropped
-  hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.power_consumption_dehumidifyer_cellar
-      below: 5
-      above: 1
-      for:
-        seconds: 30
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.dehumidifyer_cellar_status
-        option: "Idle"
-
-- alias: Set the dehumidifyer cellar state to off when power consumption is zero
-  hide_entity: true
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.power_consumption_dehumidifyer_cellar
-      below: 1
-      for:
-        seconds: 30
-  action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.dehumidifyer_cellar_status
-        option: "Off"
+        title: "Test Automation Status Change"
+        message: "Status changed to {{ states.input_select.testselect.state }}"
+#    - service: media_player.sonos_snapshot
+#      data:
+#        entity_id: media_player.kuche
+#    - service: media_player.volume_set
+#      data:
+#        entity_id: media_player.kuche
+#        volume_level: 0.3
+#    - service: tts.google_say
+#      entity_id: media_player.kuche
+#      data:
+#        message: "Test Status {{ states.input_select.testselect.state }}"
+#    - delay: '00:00:02'
+#    - service: media_player.sonos_restore
+#      data:
+#        entity_id: media_player.kuche

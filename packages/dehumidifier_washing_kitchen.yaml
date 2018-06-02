@@ -1,0 +1,74 @@
+### dehumidifier_washing_kitchen.yaml
+
+input_select:
+  dehumidifyer_washing_kitchen_status:
+    name: Dehumidifyer Washing Kitchen Status
+    options:
+      - "Off"
+      - Idle
+      - Running
+    initial: "Off"
+
+switch:
+  - platform: mystrom
+    host: !secret mystrom3_ip
+    name: mystrom3
+    
+sensor:
+  - platform: template
+    sensors:
+      power_consumption_dehumidifyer_washing_kitchen:
+        unit_of_measurement: "W"
+        value_template: >-
+          {% if states.switch.mystrom3.attributes.current_power_w %}
+            {{states.switch.mystrom3.attributes.current_power_w }}
+          {% else %}
+            0.0
+          {% endif %}
+      dehumidifyer_washing_kitchen_status:
+        value_template: "{{ states.input_select.dehumidifyer_washing_kitchen_status.state }}"
+        friendly_name: "Entfeuchter WaKü"
+        
+automation:
+  - alias: Set the dehumidifyer washing kitchen state to running when power consumption detected
+    hide_entity: true
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.power_consumption_dehumidifyer_washing_kitchen
+        above: 50
+        for:
+          seconds: 30
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dehumidifyer_washing_kitchen_status
+          option: "Running"
+
+  - alias: Set the dehumidifyer washing kitchen state to idle when power consumption has dropped
+    hide_entity: true
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.power_consumption_dehumidifyer_washing_kitchen
+        below: 5
+        above: 1
+        for:
+          seconds: 30
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dehumidifyer_washing_kitchen_status
+          option: "Idle"
+
+  - alias: Set the dehumidifyer washing kitchen state to off when power consumption is zero
+    hide_entity: true
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.power_consumption_dehumidifyer_washing_kitchen
+        below: 1
+        for:
+          seconds: 30
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dehumidifyer_washing_kitchen_status
+          option: "Off"

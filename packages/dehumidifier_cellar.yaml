@@ -1,0 +1,74 @@
+### dehumidifier_cellar.yaml
+
+input_select:
+  dehumidifyer_cellar_status:
+    name: Dehumidifyer Cellar Status
+    options:
+      - "Off"
+      - Idle
+      - Running
+    initial: "Off"
+
+switch:
+  - platform: mystrom
+    host: !secret mystrom1_ip
+    name: mystrom1
+    
+sensor:
+  - platform: template
+    sensors:
+      power_consumption_dehumidifyer_cellar:
+        unit_of_measurement: "W"
+        value_template: >-
+          {% if states.switch.mystrom1.attributes.current_power_w %}
+            {{states.switch.mystrom1.attributes.current_power_w }}
+          {% else %}
+            0.0
+          {% endif %}
+      dehumidifyer_cellar_status:
+        value_template: "{{ states.input_select.dehumidifyer_cellar_status.state }}"
+        friendly_name: "Entfeuchter Keller"
+        
+automation:
+  - alias: Set the dehumidifyer cellar state to running when power consumption detected
+    hide_entity: true
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.power_consumption_dehumidifyer_cellar
+        above: 50
+        for:
+          seconds: 30
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dehumidifyer_cellar_status
+          option: "Running"
+
+  - alias: Set the dehumidifyer cellar state to idle when power consumption has dropped
+    hide_entity: true
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.power_consumption_dehumidifyer_cellar
+        below: 5
+        above: 1
+        for:
+          seconds: 30
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dehumidifyer_cellar_status
+          option: "Idle"
+
+  - alias: Set the dehumidifyer cellar state to off when power consumption is zero
+    hide_entity: true
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.power_consumption_dehumidifyer_cellar
+        below: 1
+        for:
+          seconds: 30
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.dehumidifyer_cellar_status
+          option: "Off"

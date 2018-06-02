@@ -12,6 +12,10 @@ homeassistant:
   time_zone: Europe/Zurich
   # Customization file
   customize: !include customize.yaml
+  # Directory Whitelisting
+  whitelist_external_dirs:
+    - /config
+  packages: !include_dir_named packages
 
 # Show links to resources in log and frontend
 # introduction:
@@ -52,6 +56,11 @@ sun:
 # Text to speech
 tts:
   - platform: google
+    language: 'de'
+    cache: true
+    cache_dir: /tmp/tts
+    time_memory: 60
+
 
 # Cloud
 cloud:
@@ -65,6 +74,17 @@ mqtt:
 media_player:
   - platform: sonos
     
+telegram_bot:
+  - platform: polling
+    api_key: 557795955:AAEan5vKNbchsn_sv4z06e-VlUVfQt3uA2k
+    allowed_chat_ids:
+      - 480577640
+
+notify:
+  - name: telegram
+    platform: telegram
+    chat_id: 480577640
+
 influxdb:
   host: 127.0.0.1
   port: 8086
@@ -132,4 +152,3 @@ switch: !include switch.yaml
 
 # Device tracker
 device_tracker: !include device_tracker.yaml
-

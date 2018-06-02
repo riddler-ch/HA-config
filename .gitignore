@@ -1,6 +1,10 @@
-*
-!*.yaml
-!scenes
-!.gitignore
+core
 secrets.yaml
 known_devices.yaml
+.HA_VERSION
+home-assistant.log
+home-assistant_v2.db
+.uuid
+custom_components/sensor/__pycache__/
+tts/
+*.swp
