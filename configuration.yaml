@@ -76,7 +76,7 @@ media_player:
     
 telegram_bot:
   - platform: polling
-    api_key: 557795955:AAEan5vKNbchsn_sv4z06e-VlUVfQt3uA2k
+    api_key: !secret telegram_bot
     allowed_chat_ids:
       - 480577640
 
@@ -85,14 +85,14 @@ notify:
     platform: telegram
     chat_id: 480577640
 
-influxdb:
-  host: 127.0.0.1
-  port: 8086
-  database: home_assistant
-  default_measurement: state
-  exclude: 
-    domains:
-      - group 
+#influxdb:
+#  host: 127.0.0.1
+#  port: 8086
+#  database: home_assistant
+#  default_measurement: state
+#  exclude: 
+#    domains:
+#      - group 
 
 recorder:
   purge_keep_days: 7
